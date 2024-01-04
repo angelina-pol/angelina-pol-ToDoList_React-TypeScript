@@ -2,10 +2,14 @@ import * as React from 'react';
 import './AddTaskForm.css'
 import Selector from '../Navbar/Selector';
 
+type Props = {
+  isVisible: boolean;
+  onClose: any;
+}
 
-const AddTaskForm = ({isVisible = false, onClose}) => {
+const AddTaskForm = ({isVisible = false, onClose}: Props) => {
   
-    const keydownHandler = ({ key }) => {
+    const keydownHandler = ({ key }: any) => {
         switch (key) {
           case 'Escape':
             onClose();

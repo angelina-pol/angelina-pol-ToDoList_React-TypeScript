@@ -1,10 +1,14 @@
 import * as React from 'react';
 import './Selector.css';
 
-const Selector = (props) => {
+type Props = {
+    className: string;
+}
+
+const Selector = ({className}: Props) => {
     return (
         <div>
-            <select className={props.className}>
+            <select className={className}>
                 <option>All</option>
                 <option>Incomplete</option>
                 <option>Complete</option>

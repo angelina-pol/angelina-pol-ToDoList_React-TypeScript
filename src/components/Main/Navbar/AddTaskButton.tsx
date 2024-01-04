@@ -2,7 +2,7 @@ import * as React from 'react';
 import './AddTaskButton.css'
 import AddTaskForm from '../Tasks/AddTaskForm';
 
-const AddTaskButton = (props) => {
+const AddTaskButton = () => {
     const [isModal, setModal] = React.useState(false);
     return (
         <>
