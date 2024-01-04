@@ -1,0 +1,23 @@
+.selector {
+    background-color: rgb(179, 180, 202);
+    color: rgb(117, 117, 135);
+    border-radius: 0.3em;
+    height: 2.5em;
+    width: 6.5em;
+    border: none;
+    font-size: 0.8em;
+    font-weight: 900;
+}
+
+.statusChoose {
+    color: rgb(117, 117, 135);
+    font-weight: bold;
+    width: 98%;
+    height: 2.5em;
+    border: none;
+    border-radius: 0.3em;
+}
+
+.selector:hover {
+    background-color: rgb(166, 167, 187);
+  }
