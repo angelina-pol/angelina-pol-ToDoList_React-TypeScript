@@ -1,17 +1,23 @@
 import * as React from 'react';
 import './AddTaskButton.css'
-import AddTaskForm from '../Tasks/AddTaskForm';
+import AddTaskForm from './AddTaskFormModalWindow/AddTaskForm';
 
-const AddTaskButton = () => {
-    const [isModal, setModal] = React.useState(false);
+type AddTaskButtonProps = {
+    onAddTask: (e: any) => void;
+    isVisible: boolean;
+    setIsVisible: (val: boolean) => void;
+}
+
+const AddTaskButton: React.FC<AddTaskButtonProps> = ({onAddTask, isVisible, setIsVisible}) => {
     return (
         <>
             <div>
-                <button className="button" onClick={() => setModal(true)}>Add Task</button>
+                <button className="button" onClick={() => setIsVisible(true)}>Add Task</button>
             </div>
             <AddTaskForm
-                    isVisible={isModal}
-                    onClose={() => setModal(false)}
+                    isVisible={isVisible}
+                    onClose={() => setIsVisible(false)} 
+                    onAddTask={onAddTask}
             />
         </>
     )
