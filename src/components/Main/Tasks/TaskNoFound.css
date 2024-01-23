@@ -1,0 +1,22 @@
+.taskNoFound {
+    width: 100%;
+    background-color: rgb(226, 227, 237);
+    border-radius: 0.3em;
+    height: 3.6em;
+    margin-top: 0.5em;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center; 
+    
+}
+
+.noTaskNoFound {
+    background: rgb(208, 209, 219);
+    border-radius: 0.3em;
+    margin: 0 auto;
+    text-align: center;
+    width: 20%;
+    height: 50%;
+    font-size: 0.9em;
+    line-height: 1.8em;
+}

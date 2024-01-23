@@ -1,0 +1,15 @@
+.inputTask {
+  width: 97%;
+  height: 2.5em;
+  border: none;
+  border-radius: 0.3em;
+  color: rgb(117, 117, 135);
+  font-weight: bold;
+  margin: 0.5em 0em 1em 0em;
+  padding-left: 0.3em;
+}
+
+.titleInput {
+  color: rgb(134, 135, 158);
+  font-size: 0.85em;
+}

@@ -47,7 +47,7 @@
 
 .modal-header {
   justify-content: space-between;
-  padding: 1em 1em 0em 1em;
+  padding: 1em 1em 0.5em 1em;
 }
 
 .modal-footer {
@@ -97,22 +97,6 @@
 
 .cancelButton:hover {
   background-color: rgb(166, 167, 187);
-}
-
-.inputTask {
-  width: 97%;
-  height: 2.5em;
-  border: none;
-  border-radius: 0.3em;
-  color: rgb(117, 117, 135);
-  font-weight: bold;
-}
-
-.titleInput,
-.statusInput {
-  color: rgb(134, 135, 158);
-  font-size: 0.85em;
-  margin-bottom: 0.5em;
 }
 
 @keyframes appear {

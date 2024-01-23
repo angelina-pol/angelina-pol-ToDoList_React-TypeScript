@@ -6,9 +6,10 @@ type AddTaskButtonProps = {
     onAddTask: (e: any) => void;
     isVisible: boolean;
     setIsVisible: (val: boolean) => void;
+    onInputTask: (e: any) => void;
 }
 
-const AddTaskButton: React.FC<AddTaskButtonProps> = ({onAddTask, isVisible, setIsVisible}) => {
+const AddTaskButton: React.FC<AddTaskButtonProps> = ({onAddTask, isVisible, setIsVisible, onInputTask}) => {
     return (
         <>
             <div>
@@ -18,6 +19,7 @@ const AddTaskButton: React.FC<AddTaskButtonProps> = ({onAddTask, isVisible, setI
                     isVisible={isVisible}
                     onClose={() => setIsVisible(false)} 
                     onAddTask={onAddTask}
+                    onInputTask={onInputTask}
             />
         </>
     )

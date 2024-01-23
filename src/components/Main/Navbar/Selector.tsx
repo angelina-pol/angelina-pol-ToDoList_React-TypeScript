@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Selector.css';
 
-const Selector = (props) => {
+const Selector = (props: any) => {
     return (
         <div>
             <select className={props.className}>
