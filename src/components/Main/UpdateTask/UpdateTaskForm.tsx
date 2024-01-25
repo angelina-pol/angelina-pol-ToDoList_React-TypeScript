@@ -1,21 +1,21 @@
 import * as React from 'react';
-import './AddTaskForm.css'
-import Input from './Input';
-import Status from './Status';
+import './UpdateTaskForm.css';
+import Input from '../Navbar/AddTaskFormModalWindow/Input';
+import Status from '../Navbar/AddTaskFormModalWindow/Status';
 
-type AddTaskFormProps = {
-  isVisible: boolean;
+type UpdateTaskFormProps = {
+  isVisibleUpdate: boolean;
   onClose: any;
-  onAddTask: (e: any) => void;
+  onEditEnd: (e: any) => void;
   onInputTask: (e: any) => void;
 };
 
-const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, onAddTask, onInputTask}) => {
-  return (!isVisible) ? null : (
+const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({ isVisibleUpdate = false, onClose, onEditEnd, onInputTask}) => {
+  return (!isVisibleUpdate) ? null : (
     <div className="modal" onClick={onClose}>
       <div className="modal-dialog" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h3 className="modal-title">Add Task</h3>
+          <h3 className="modal-title">Update Task</h3>
           <span className="modal-close" onClick={onClose}>
             &times;
           </span>
@@ -30,7 +30,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
         </div>
         <div className="modal-footer">
           <div>
-            <button className="ddTaskButton" onClick={onAddTask}>Add Task</button>
+            <button className="updateTaskButton" onClick={onEditEnd}>Update Task</button>
             <button className="cancelButton" onClick={onClose}>Cancel</button>
           </div>
         </div>
@@ -39,4 +39,4 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
   );
 };
 
-export default AddTaskForm;
+export default UpdateTaskForm;

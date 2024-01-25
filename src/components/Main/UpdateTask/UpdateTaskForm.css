@@ -1,0 +1,117 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  animation-name: appear;
+  animation-duration: 300ms;
+}
+
+.modal-dialog {
+  width: 30%;
+  max-width: 550px;
+  background: rgb(236, 237, 245);
+  position: relative;
+  margin: 0 20px;
+  max-height: calc(100vh - 40px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  border-radius: 0.3em;
+}
+
+.modal-header,
+.modal-footer {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.modal-title {
+  color: rgb(117, 117, 135);
+  margin: 0em;
+}
+
+.modal-header {
+  justify-content: space-between;
+  padding: 1em 1em 0.5em 1em;
+}
+
+.modal-footer {
+  justify-content: flex-start;
+}
+
+.modal-close {
+  cursor: pointer;
+  margin: 0em;
+}
+
+.modal-body {
+  overflow: auto;
+}
+
+.modal-content {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.updateTaskButton {
+  background-color: rgb(102, 111, 232);
+  color: white;
+  font-weight: 900;
+  border-radius: 0.3em;
+  height: 2.5em;
+  border: none;
+  font-size: 0.8em;
+  margin-right: 0.5em;
+}
+
+.addTaskButton:hover {
+  background-color: rgb(94, 102, 219);
+}
+
+.cancelButton {
+  background-color: rgb(179, 180, 202);
+  color: rgb(117, 117, 135);
+  border-radius: 0.3em;
+  height: 2.5em;
+  width: 6.5em;
+  border: none;
+  font-size: 0.8em;
+  font-weight: 900;
+}
+
+.cancelButton:hover {
+  background-color: rgb(166, 167, 187);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-150px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

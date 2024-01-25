@@ -8,9 +8,9 @@ type RemoveTaskProps = {
 }
 
 const RemoveTask:  React.FC<RemoveTaskProps> = ({ onRemoveTask, time }) => {
-    return (
-      <button className="removeTaskButton" onClick={onRemoveTask} id={time}><Trash /></button>
-    )
-}
+  return (
+    <button className="removeTaskButton" onClick={onRemoveTask} id={time}><Trash /></button>
+  );
+};
 
 export default RemoveTask;
