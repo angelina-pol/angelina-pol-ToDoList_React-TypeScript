@@ -1,9 +1,14 @@
 import './Selector.css';
 
-const Selector = (props: any) => {
+type SelectorProps = {
+  onDisplayTasks: (e: any) => void;
+  className: string;
+};
+
+const Selector: React.FC<SelectorProps> = ({ onDisplayTasks, className }) => {
   return (
     <div>
-      <select className={props.className}>
+      <select className={className} onChange={onDisplayTasks}>
         <option>All</option>
         <option>Incomplete</option>
         <option>Complete</option>

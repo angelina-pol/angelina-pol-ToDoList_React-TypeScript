@@ -15,6 +15,7 @@ type MainProps = {
 interface StateTask {
   task: string;
   time: string;
+  isCompleted: boolean; 
 }
 
 const Main: React.FC<MainProps> = () => {
@@ -23,22 +24,33 @@ const Main: React.FC<MainProps> = () => {
   const [isVisibleUpdate, setIsVisibleUpdate] = React.useState<boolean>(false);
   const [task, setTask] = React.useState<string>('');
   const [currentlyEditedTaskId, setCurrentlyEditedTaskId] = React.useState<string>('');
+  const [isCompletedTask, setIsCompletedTask] = React.useState<boolean>(false);
+  const [displayTasks, setDisplayTasks] = React.useState<'All' | 'Incomplete' | 'Complete'>('All');  
 
-  const onAddTask = () => {
+  const timeAddTask = () => {
     const { DateTime } = require("luxon");
     const dt = DateTime.now();
-    let newTime = dt.toLocaleString(DateTime.DATETIME_MED) + ':' + dt.second;
+    return dt.toLocaleString(DateTime.DATETIME_MED) + ':' + dt.second;
+  }
+
+  const onAddTask = () => {
     let obj = {
       task: task,
-      time: newTime,
+      time: timeAddTask(),
+      isCompleted: isCompletedTask,
     };
     setState([...state, obj]);
     setIsVisible(false);
+    setIsCompletedTask(false);
   };
 
   const onInputTask = (e: any) => {
     setTask(e.target.value);
   };
+  
+  const onStatusTask = (e: any) => {
+    setIsCompletedTask(!!e.target.value);
+  }
 
   const onRemoveTask = (e: any) => {
     let newState = state.filter(obj => obj.time !== e.currentTarget.id);
@@ -46,13 +58,11 @@ const Main: React.FC<MainProps> = () => {
   };
 
   const onEditEnd = () => {
-    const { DateTime } = require("luxon");
-    const dt = DateTime.now();
-    let newTime = dt.toLocaleString(DateTime.DATETIME_MED) + ':' + dt.second;
     let arrWithElForChange = state.filter(obj => obj.time === currentlyEditedTaskId);
     let elForChange = {
       task: task,
-      time: newTime,
+      time: currentlyEditedTaskId,
+      isCompleted: isCompletedTask,
     };
     let indexForChange = state.indexOf(arrWithElForChange[0]);
     state.splice(indexForChange, 1, elForChange);
@@ -65,24 +75,46 @@ const Main: React.FC<MainProps> = () => {
     setCurrentlyEditedTaskId(id);
   };
 
+  const onDisplayTasks = (e: any) => {
+    setDisplayTasks(e.target.value);
+  }
+
+  const filterTasks = (el: StateTask) => {
+    if (displayTasks === 'Incomplete') {
+      return !el.isCompleted;
+    }
+    if (displayTasks === 'Complete') {
+      return el.isCompleted;
+    }
+    return true;
+  }
+
   return (
     <div className="main">
       <div className="navbar">
         <AddTaskButton setIsVisible={setIsVisible} />
-        <Selector className={"selector"} />
+        <Selector 
+          className={"selector"} 
+          onDisplayTasks={onDisplayTasks}
+        />
       </div>
       <div>
-        {state.length === 0
+        {
+        state.length === 0
         ? <TaskNoFound />
-        : state.map((obj, i) => 
-          <Task 
-            key={i}
-            textTask={obj.task}
-            time={obj.time}
-            onRemoveTask={onRemoveTask}
-            onAddTask={onAddTask}
-            onEditStart={onEditStart} 
-          />)
+        : state
+          .filter(filterTasks)
+          .map((obj, i) => 
+            <Task 
+              key={i}
+              textTask={obj.task}
+              time={obj.time}
+              isCompleted={obj.isCompleted}
+              onRemoveTask={onRemoveTask}
+              onAddTask={onAddTask}
+              onEditStart={onEditStart} 
+            />
+          )
         }
       </div>
       <AddTaskForm
@@ -90,12 +122,14 @@ const Main: React.FC<MainProps> = () => {
         onClose={() => setIsVisible(false)}
         onAddTask={onAddTask}
         onInputTask={onInputTask} 
+        onStatusTask={onStatusTask}
       />
       <UpdateTaskForm
         isVisibleUpdate={isVisibleUpdate}
         onClose={() => setIsVisibleUpdate(false)}
         onEditEnd={onEditEnd}
         onInputTask={onInputTask}
+        onStatusTask={onStatusTask}
       />
     </div>
   );

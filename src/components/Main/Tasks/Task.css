@@ -19,10 +19,17 @@
   justify-content: space-between;
 }
 
-.textTask {
+.textTaskIncompleted {
   margin: 0em;
   font-size: 1.1em;
   color: rgb(86, 86, 102);
+}
+
+.textTaskCompleted {
+  margin: 0em;
+  font-size: 1.1em;
+  color: rgb(134, 134, 161);
+  text-decoration: line-through;
 }
 
 .time {
@@ -40,6 +47,33 @@
 }
 
 .checkbox {
+  display: none;
+} 
+
+.checkboxNewIncompleted {
   margin: 0.7em 0.7em 0.7em 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: rgb(226, 227, 237);
+  border-radius: 0.1em;
 }
 
+.checkboxNewCompleted {
+  margin: 0.7em 0.7em 0.7em 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: rgb(102, 111, 232);
+  border-radius: 0.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[type=checkbox]:checked + span:before {
+  content: url(file:///Users/angelinapolozenceva/Documents/Обучение/2024/gitclonTODO/src/images/check.svg)
+}
+
+.titleTask {
+  display: flex;
+  align-items: center;
+}

@@ -5,7 +5,7 @@ type TaskNoFoundProps = {
     
 };
 
-const Task:  React.FC<TaskNoFoundProps> = () => {
+const TaskNoFound:  React.FC<TaskNoFoundProps> = () => {
   return (
     <div className="taskNoFound">
       <div className="noTaskNoFound">No Todo Found</div>
@@ -13,4 +13,4 @@ const Task:  React.FC<TaskNoFoundProps> = () => {
   );
 };
 
-export default Task;
+export default TaskNoFound;

@@ -8,9 +8,10 @@ type UpdateTaskFormProps = {
   onClose: any;
   onEditEnd: (e: any) => void;
   onInputTask: (e: any) => void;
+  onStatusTask: (e: any) => void;
 };
 
-const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({ isVisibleUpdate = false, onClose, onEditEnd, onInputTask}) => {
+const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({ isVisibleUpdate = false, onClose, onEditEnd, onInputTask, onStatusTask }) => {
   return (!isVisibleUpdate) ? null : (
     <div className="modal" onClick={onClose}>
       <div className="modal-dialog" onClick={e => e.stopPropagation()}>
@@ -24,7 +25,7 @@ const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({ isVisibleUpdate = false
           <div className="modal-content">
             <div>
               <Input onInputTask={onInputTask}/>
-              <Status />
+              <Status onStatusTask={onStatusTask}/>
             </div>
           </div>
         </div>

@@ -2,3 +2,13 @@
   color: rgb(134, 135, 158);
   font-size: 0.85em;
 }
+
+.statusChoose {
+  color: rgb(117, 117, 135);
+  font-weight: bold;
+  width: 98%;
+  height: 2.5em;
+  border: none;
+  border-radius: 0.3em;
+  margin-top: 0.5em;
+}

@@ -6,22 +6,38 @@ import RemoveTask from './ButtonForTask/RemoveTask/RemoveTask';
 type TaskProps = {
   textTask: string;
   time: any;
+  isCompleted: boolean;
   onRemoveTask: (e: any) => void;
   onAddTask: (e: any) => void;
   onEditStart: (id: string) => void;
 };
 
-const Task:  React.FC<TaskProps> = ({textTask, time, onRemoveTask, onEditStart}) => {
+const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask, onEditStart }) => {
+  const textTaskStyle = (): string => {
+    return isCompleted ? "textTaskCompleted" : "textTaskIncompleted";
+  };
+
+  const isChecked = (): boolean => {
+    return isCompleted ? true : false;
+  };
+
+  const isCheckbox = (): string => {
+    return isCompleted ? "checkboxNewCompleted" : "checkboxNewIncompleted"
+  }
+
   return (
     <div className="task">
       <div className="noTask">
         <div className="checkAndText">
-          <div className="divCheckbox">
-            <input className="checkbox" type="checkbox" name="checkboxTask" />
-          </div>
-          <div>
-            <p className="textTask">{textTask}</p>
-            <p className="time">{time}</p>
+          <label className="divCheckbox">
+            <input className="checkbox" type="checkbox" name="checkboxTask" checked={isChecked()}/>
+            <span className={isCheckbox()}></span>
+          </label>
+          <div className='titleTask'>
+            <div>
+              <p className={textTaskStyle()}>{textTask}</p>
+              <p className="time">{time}</p>
+            </div>
           </div>
         </div>
         <div>

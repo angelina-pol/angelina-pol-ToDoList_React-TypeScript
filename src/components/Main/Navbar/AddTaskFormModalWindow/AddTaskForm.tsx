@@ -8,9 +8,10 @@ type AddTaskFormProps = {
   onClose: any;
   onAddTask: (e: any) => void;
   onInputTask: (e: any) => void;
+  onStatusTask: (e: any) => void;
 };
 
-const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, onAddTask, onInputTask}) => {
+const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, onAddTask, onInputTask, onStatusTask }) => {
   return (!isVisible) ? null : (
     <div className="modal" onClick={onClose}>
       <div className="modal-dialog" onClick={e => e.stopPropagation()}>
@@ -24,13 +25,13 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
           <div className="modal-content">
             <div>
               <Input onInputTask={onInputTask}/>
-              <Status />
+              <Status onStatusTask={onStatusTask}/>
             </div>
           </div>
         </div>
         <div className="modal-footer">
           <div>
-            <button className="ddTaskButton" onClick={onAddTask}>Add Task</button>
+            <button className="addTaskButton" onClick={onAddTask}>Add Task</button>
             <button className="cancelButton" onClick={onClose}>Cancel</button>
           </div>
         </div>
