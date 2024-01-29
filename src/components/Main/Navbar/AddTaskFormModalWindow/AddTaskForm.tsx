@@ -24,7 +24,10 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
         <div className="modal-body">
           <div className="modal-content">
             <div>
-              <Input onInputTask={onInputTask}/>
+              <Input 
+                onInputTask={onInputTask} 
+                textTask={""}
+              />
               <Status onStatusTask={onStatusTask}/>
             </div>
           </div>

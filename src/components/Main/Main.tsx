@@ -68,6 +68,7 @@ const Main: React.FC<MainProps> = () => {
     state.splice(indexForChange, 1, elForChange);
     setState(state);
     setIsVisibleUpdate(false);
+    setIsCompletedTask(false);
   };
 
   const onEditStart = (id: string) => {
@@ -130,6 +131,7 @@ const Main: React.FC<MainProps> = () => {
         onEditEnd={onEditEnd}
         onInputTask={onInputTask}
         onStatusTask={onStatusTask}
+        textTask={task}
       />
     </div>
   );
