@@ -27,11 +27,21 @@ const Main: React.FC<MainProps> = () => {
   const [isCompletedTask, setIsCompletedTask] = React.useState<boolean>(false);
   const [displayTasks, setDisplayTasks] = React.useState<'All' | 'Incomplete' | 'Complete'>('All');  
 
+  let currentlyObj: StateTask | undefined = state.find(el => el.time === currentlyEditedTaskId);
+  let currentlyEditedTask;
+  let currentlyEditedStatusBoolean;
+  let currentlyEditedStatus;
+  if (typeof(currentlyObj) === 'object') {
+    currentlyEditedTask = currentlyObj.task;
+    currentlyEditedStatusBoolean = currentlyObj.isCompleted;
+    currentlyEditedStatusBoolean ? currentlyEditedStatus = "Complete" : currentlyEditedStatus = "Incomplete";
+  };
+
   const timeAddTask = () => {
     const { DateTime } = require("luxon");
     const dt = DateTime.now();
     return dt.toLocaleString(DateTime.DATETIME_MED) + ':' + dt.second;
-  }
+  };
 
   const onAddTask = () => {
     let obj = {
@@ -49,8 +59,12 @@ const Main: React.FC<MainProps> = () => {
   };
   
   const onStatusTask = (e: any) => {
-    setIsCompletedTask(!!e.target.value);
-  }
+    setIsCompletedTask(
+      e.target.value === "Complete" 
+      ? true
+      : false
+    );
+  };
 
   const onRemoveTask = (e: any) => {
     let newState = state.filter(obj => obj.time !== e.currentTarget.id);
@@ -78,17 +92,17 @@ const Main: React.FC<MainProps> = () => {
 
   const onDisplayTasks = (e: any) => {
     setDisplayTasks(e.target.value);
-  }
+  };
 
   const filterTasks = (el: StateTask) => {
     if (displayTasks === 'Incomplete') {
       return !el.isCompleted;
-    }
+    };
     if (displayTasks === 'Complete') {
       return el.isCompleted;
-    }
+    };
     return true;
-  }
+  };
 
   return (
     <div className="main">
@@ -107,12 +121,10 @@ const Main: React.FC<MainProps> = () => {
           .filter(filterTasks)
           .map((obj, i) => 
             <Task 
-              key={i}
               textTask={obj.task}
               time={obj.time}
               isCompleted={obj.isCompleted}
               onRemoveTask={onRemoveTask}
-              onAddTask={onAddTask}
               onEditStart={onEditStart} 
             />
           )
@@ -131,7 +143,8 @@ const Main: React.FC<MainProps> = () => {
         onEditEnd={onEditEnd}
         onInputTask={onInputTask}
         onStatusTask={onStatusTask}
-        textTask={task}
+        textTask={currentlyEditedTask}
+        statusTask={currentlyEditedStatus}
       />
     </div>
   );

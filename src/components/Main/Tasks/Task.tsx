@@ -8,7 +8,6 @@ type TaskProps = {
   time: any;
   isCompleted: boolean;
   onRemoveTask: (e: any) => void;
-  onAddTask: (e: any) => void;
   onEditStart: (id: string) => void;
 };
 
@@ -41,8 +40,14 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask,
           </div>
         </div>
         <div>
-          <RemoveTask onRemoveTask={onRemoveTask} time={time}/>
-          <EditTask onEditStart={onEditStart} time={time}/>
+          <RemoveTask 
+            onRemoveTask={onRemoveTask} 
+            time={time}
+          />
+          <EditTask 
+            onEditStart={onEditStart} 
+            time={time}
+          />
         </div>
       </div>
     </div>

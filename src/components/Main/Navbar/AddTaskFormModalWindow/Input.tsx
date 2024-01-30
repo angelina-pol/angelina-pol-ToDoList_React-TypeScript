@@ -2,7 +2,7 @@ import './Input.css';
 
 type InputProps = {
   onInputTask: (e: any) => void;
-  textTask: string;
+  textTask: string | undefined;
 };
 
 const Input: React.FC<InputProps> = ({ onInputTask, textTask }) => {

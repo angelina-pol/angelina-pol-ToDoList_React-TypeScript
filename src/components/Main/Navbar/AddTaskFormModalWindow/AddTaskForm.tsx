@@ -28,7 +28,10 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
                 onInputTask={onInputTask} 
                 textTask={""}
               />
-              <Status onStatusTask={onStatusTask}/>
+              <Status 
+                onStatusTask={onStatusTask}
+                statusTask={"Incomplete"}
+              />
             </div>
           </div>
         </div>
