@@ -27,7 +27,7 @@ const Main: React.FC<MainProps> = () => {
   const [isCompletedTask, setIsCompletedTask] = React.useState<boolean>(false);
   const [displayTasks, setDisplayTasks] = React.useState<'All' | 'Incomplete' | 'Complete'>('All');  
 
-  let currentlyObj: StateTask | undefined = state.find(el => el.time === currentlyEditedTaskId);
+  const currentlyObj: StateTask | undefined = state.find(el => el.time === currentlyEditedTaskId);
   let currentlyEditedTask;
   let currentlyEditedStatusBoolean;
   let currentlyEditedStatus;
@@ -44,7 +44,7 @@ const Main: React.FC<MainProps> = () => {
   };
 
   const onAddTask = () => {
-    let obj = {
+    const obj = {
       task: task,
       time: timeAddTask(),
       isCompleted: isCompletedTask,
@@ -72,15 +72,10 @@ const Main: React.FC<MainProps> = () => {
   };
 
   const onEditEnd = () => {
-    let arrWithElForChange = state.filter(obj => obj.time === currentlyEditedTaskId);
-    let elForChange = {
-      task: task,
-      time: currentlyEditedTaskId,
-      isCompleted: isCompletedTask,
-    };
-    let indexForChange = state.indexOf(arrWithElForChange[0]);
-    state.splice(indexForChange, 1, elForChange);
-    setState(state);
+    const editedTask = state.filter(obj => obj.time === currentlyEditedTaskId)[0];
+    const indexForChange = state.indexOf(editedTask);
+    state.splice(indexForChange, 1, { task: task, time: currentlyEditedTaskId, isCompleted: isCompletedTask });
+    setState([...state]);
     setIsVisibleUpdate(false);
     setIsCompletedTask(false);
   };
@@ -104,6 +99,13 @@ const Main: React.FC<MainProps> = () => {
     return true;
   };
 
+  const onChecked = (e: any, id: string) => {
+    const editedTask = state.filter(obj => obj.time === id)[0];
+    const indexForChange = state.indexOf(editedTask);
+    state.splice(indexForChange, 1, { ...editedTask, isCompleted: e.target.checked });
+    setState([...state]);
+  }
+
   return (
     <div className="main">
       <div className="navbar">
@@ -126,6 +128,7 @@ const Main: React.FC<MainProps> = () => {
               isCompleted={obj.isCompleted}
               onRemoveTask={onRemoveTask}
               onEditStart={onEditStart} 
+              onChecked={onChecked}
             />
           )
         }

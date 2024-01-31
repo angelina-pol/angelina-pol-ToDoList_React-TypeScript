@@ -69,8 +69,9 @@
   align-items: center;
 }
 
-[type=checkbox]:checked + span:before {
+.checkboxNewCompleted::after {
   content: url(file:///Users/angelinapolozenceva/Documents/Обучение/2024/gitclonTODO/src/images/check.svg)
+
 }
 
 .titleTask {

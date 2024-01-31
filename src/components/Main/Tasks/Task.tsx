@@ -9,15 +9,16 @@ type TaskProps = {
   isCompleted: boolean;
   onRemoveTask: (e: any) => void;
   onEditStart: (id: string) => void;
+  onChecked: (e: any, id: string) => void;
 };
 
-const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask, onEditStart }) => {
+const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask, onEditStart, onChecked }) => {
   const textTaskStyle = (): string => {
     return isCompleted ? "textTaskCompleted" : "textTaskIncompleted";
   };
 
   const isChecked = (): boolean => {
-    return isCompleted ? true : false;
+    return isCompleted;
   };
 
   const isCheckbox = (): string => {
@@ -29,7 +30,13 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask,
       <div className="noTask">
         <div className="checkAndText">
           <label className="divCheckbox">
-            <input className="checkbox" type="checkbox" name="checkboxTask" checked={isChecked()}/>
+            <input 
+              className="checkbox" 
+              type="checkbox" 
+              name="checkboxTask" 
+              defaultChecked={isChecked()} 
+              onChange={(event) => onChecked(event, time)}
+            />
             <span className={isCheckbox()}></span>
           </label>
           <div className='titleTask'>
