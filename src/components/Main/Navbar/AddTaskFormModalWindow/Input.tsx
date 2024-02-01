@@ -1,7 +1,8 @@
 import './Input.css';
+import { ChangeEvent } from 'react';
 
 type InputProps = {
-  onInputTask: (e: any) => void;
+  onInputTask: (e: ChangeEvent<HTMLInputElement>) => void;
   textTask: string | undefined;
 };
 

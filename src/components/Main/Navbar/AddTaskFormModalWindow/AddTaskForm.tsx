@@ -2,22 +2,26 @@ import * as React from 'react';
 import './AddTaskForm.css'
 import Input from './Input';
 import Status from './Status';
+import { ChangeEvent } from 'react';
 
 type AddTaskFormProps = {
   isVisible: boolean;
-  onClose: any;
-  onAddTask: (e: any) => void;
-  onInputTask: (e: any) => void;
-  onStatusTask: (e: any) => void;
+  onClose: () => void; 
+  onAddTask: () => void;
+  onInputTask: (e: ChangeEvent<HTMLInputElement>) => void;
+  onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, onAddTask, onInputTask, onStatusTask }) => {
+  const onClick = () => {
+    onClose();
+  }
   return (!isVisible) ? null : (
-    <div className="modal" onClick={onClose}>
+    <div className="modal" onClick={onClick}>
       <div className="modal-dialog" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h3 className="modal-title">Add Task</h3>
-          <span className="modal-close" onClick={onClose}>
+          <span className="modal-close" onClick={onClick}>
             &times;
           </span>
         </div>
