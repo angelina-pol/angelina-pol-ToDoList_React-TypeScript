@@ -2,14 +2,15 @@ import * as React from 'react';
 import './Task.css';
 import EditTask from './ButtonForTask/EditTask/EditTask';
 import RemoveTask from './ButtonForTask/RemoveTask/RemoveTask';
+import { MouseEvent, ChangeEvent } from 'react';
 
 type TaskProps = {
   textTask: string;
-  time: any;
+  time: string;
   isCompleted: boolean;
-  onRemoveTask: (e: any) => void;
+  onRemoveTask: (e: MouseEvent<HTMLButtonElement>) => void;
   onEditStart: (id: string) => void;
-  onChecked: (e: any, id: string) => void;
+  onChecked: (e: ChangeEvent<HTMLInputElement>, id: string) => void;
 };
 
 const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask, onEditStart, onChecked }) => {

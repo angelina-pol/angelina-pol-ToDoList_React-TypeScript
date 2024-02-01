@@ -1,7 +1,8 @@
 import './Selector.css';
+import { ChangeEvent } from 'react';
 
 type SelectorProps = {
-  onDisplayTasks: (e: any) => void;
+  onDisplayTasks: (e: ChangeEvent<HTMLSelectElement> ) => void;
   className: string;
 };
 

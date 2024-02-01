@@ -2,13 +2,14 @@ import * as React from 'react';
 import './UpdateTaskForm.css';
 import Input from '../Navbar/AddTaskFormModalWindow/Input';
 import Status from '../Navbar/AddTaskFormModalWindow/Status';
+import { ChangeEvent } from 'react';
 
 type UpdateTaskFormProps = {
   isVisibleUpdate: boolean;
-  onClose: any;
-  onEditEnd: (e: any) => void;
-  onInputTask: (e: any) => void;
-  onStatusTask: (e: any) => void;
+  onClose: () => void;
+  onEditEnd: () => void;
+  onInputTask: (e: ChangeEvent<HTMLInputElement>) => void;
+  onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
   textTask: string | undefined;
   statusTask: string | undefined;
 };

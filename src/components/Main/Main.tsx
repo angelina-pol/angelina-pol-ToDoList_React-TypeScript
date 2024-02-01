@@ -7,6 +7,7 @@ import TaskNoFound from './Tasks/TaskNoFound';
 import Task from './Tasks/Task';
 import UpdateTaskForm from './UpdateTask/UpdateTaskForm';
 import AddTaskForm from './Navbar/AddTaskFormModalWindow/AddTaskForm';
+import { ChangeEvent, MouseEvent } from 'react';
 
 type MainProps = {
 
@@ -54,11 +55,11 @@ const Main: React.FC<MainProps> = () => {
     setIsCompletedTask(false);
   };
 
-  const onInputTask = (e: any) => {
+  const onInputTask = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.target.value);
   };
   
-  const onStatusTask = (e: any) => {
+  const onStatusTask = (e: ChangeEvent<HTMLSelectElement>) => {
     setIsCompletedTask(
       e.target.value === "Complete" 
       ? true
@@ -66,7 +67,7 @@ const Main: React.FC<MainProps> = () => {
     );
   };
 
-  const onRemoveTask = (e: any) => {
+  const onRemoveTask = (e: MouseEvent<HTMLButtonElement>) => {
     let newState = state.filter(obj => obj.time !== e.currentTarget.id);
     setState(newState);
   };
@@ -85,8 +86,8 @@ const Main: React.FC<MainProps> = () => {
     setCurrentlyEditedTaskId(id);
   };
 
-  const onDisplayTasks = (e: any) => {
-    setDisplayTasks(e.target.value);
+  const onDisplayTasks = (e: ChangeEvent<HTMLSelectElement> ) => {
+    setDisplayTasks(e.target.value as "All" | "Incomplete" | "Complete");
   };
 
   const filterTasks = (el: StateTask) => {
@@ -99,7 +100,7 @@ const Main: React.FC<MainProps> = () => {
     return true;
   };
 
-  const onChecked = (e: any, id: string) => {
+  const onChecked = (e: ChangeEvent<HTMLInputElement>, id: string) => {
     const editedTask = state.filter(obj => obj.time === id)[0];
     const indexForChange = state.indexOf(editedTask);
     state.splice(indexForChange, 1, { ...editedTask, isCompleted: e.target.checked });

@@ -1,7 +1,8 @@
 import './Status.css';
+import { ChangeEvent } from 'react';
 
 type StatusProps = {
-  onStatusTask: (e: any) => void;
+  onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
   statusTask: string | undefined;
 };
 

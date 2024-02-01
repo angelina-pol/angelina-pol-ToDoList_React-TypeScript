@@ -3,7 +3,7 @@ import './EditTask.css';
 import Pencil from './Pencil';
 
 type EditTaskProps = {
-  time: any;
+  time: string;
   onEditStart: (id: string) => void;
 };
 
