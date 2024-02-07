@@ -8,27 +8,24 @@ import Task from './Tasks/Task';
 import UpdateTaskForm from './UpdateTask/UpdateTaskForm';
 import AddTaskForm from './Navbar/AddTaskFormModalWindow/AddTaskForm';
 import { ChangeEvent, MouseEvent } from 'react';
+import { observer } from 'mobx-react-lite';
+import store from '../../stores/mainStore';
 
 type MainProps = {
 
 }
-
 interface StateTask {
   task: string;
   time: string;
   isCompleted: boolean; 
 }
 
-const Main: React.FC<MainProps> = () => {
-  const [state, setState] = React.useState<StateTask[]>([]);
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
-  const [isVisibleUpdate, setIsVisibleUpdate] = React.useState<boolean>(false);
-  const [task, setTask] = React.useState<string>('');
+const Main: React.FC<MainProps> = observer(() => {
   const [currentlyEditedTaskId, setCurrentlyEditedTaskId] = React.useState<string>('');
   const [isCompletedTask, setIsCompletedTask] = React.useState<boolean>(false);
   const [displayTasks, setDisplayTasks] = React.useState<'All' | 'Incomplete' | 'Complete'>('All');  
 
-  const currentlyObj: StateTask | undefined = state.find(el => el.time === currentlyEditedTaskId);
+  const currentlyObj = store.tasks.find(el => el.time === currentlyEditedTaskId);
   let currentlyEditedTask;
   let currentlyEditedStatusBoolean;
   let currentlyEditedStatus;
@@ -46,17 +43,17 @@ const Main: React.FC<MainProps> = () => {
 
   const onAddTask = () => {
     const obj = {
-      task: task,
+      task: store.task,
       time: timeAddTask(),
       isCompleted: isCompletedTask,
     };
-    setState([...state, obj]);
-    setIsVisible(false);
+    store.tasks.push(obj);
+    store.isVisibleAddModal = false;
     setIsCompletedTask(false);
   };
 
   const onInputTask = (e: ChangeEvent<HTMLInputElement>) => {
-    setTask(e.target.value);
+    store.task = e.target.value;
   };
   
   const onStatusTask = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -68,21 +65,19 @@ const Main: React.FC<MainProps> = () => {
   };
 
   const onRemoveTask = (e: MouseEvent<HTMLButtonElement>) => {
-    let newState = state.filter(obj => obj.time !== e.currentTarget.id);
-    setState(newState);
+    store.tasks.filter(obj => obj.time !== e.currentTarget.id);
   };
 
   const onEditEnd = () => {
-    const editedTask = state.filter(obj => obj.time === currentlyEditedTaskId)[0];
-    const indexForChange = state.indexOf(editedTask);
-    state.splice(indexForChange, 1, { task: task, time: currentlyEditedTaskId, isCompleted: isCompletedTask });
-    setState([...state]);
-    setIsVisibleUpdate(false);
+    const editedTask = store.tasks.filter(obj => obj.time === currentlyEditedTaskId)[0];
+    const indexForChange = store.tasks.indexOf(editedTask);
+    store.tasks.splice(indexForChange, 1, { task: store.task, time: currentlyEditedTaskId, isCompleted: isCompletedTask });
+    store.isVisibleUpdateModal = false;
     setIsCompletedTask(false);
   };
 
   const onEditStart = (id: string) => {
-    setIsVisibleUpdate(true);
+    store.isVisibleUpdateModal = true;
     setCurrentlyEditedTaskId(id);
   };
 
@@ -90,7 +85,13 @@ const Main: React.FC<MainProps> = () => {
     setDisplayTasks(e.target.value as "All" | "Incomplete" | "Complete");
   };
 
-  const filterTasks = (el: StateTask) => {
+  const onChecked = (e: ChangeEvent<HTMLInputElement>, id: string) => {
+    const editedTask = store.tasks.filter(obj => obj.time === id)[0];
+    const indexForChange = store.tasks.indexOf(editedTask);
+    store.tasks.splice(indexForChange, 1, { ...editedTask, isCompleted: e.target.checked });
+  }
+
+  const filterTasks = (el: any) => {
     if (displayTasks === 'Incomplete') {
       return !el.isCompleted;
     };
@@ -100,17 +101,10 @@ const Main: React.FC<MainProps> = () => {
     return true;
   };
 
-  const onChecked = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-    const editedTask = state.filter(obj => obj.time === id)[0];
-    const indexForChange = state.indexOf(editedTask);
-    state.splice(indexForChange, 1, { ...editedTask, isCompleted: e.target.checked });
-    setState([...state]);
-  }
-
   return (
     <div className="main">
       <div className="navbar">
-        <AddTaskButton setIsVisible={setIsVisible} />
+        <AddTaskButton />
         <Selector 
           className={"selector"} 
           onDisplayTasks={onDisplayTasks}
@@ -118,9 +112,9 @@ const Main: React.FC<MainProps> = () => {
       </div>
       <div>
         {
-        state.length === 0
+        store.tasks.length === 0
         ? <TaskNoFound />
-        : state
+        : store.tasks
           .filter(filterTasks)
           .map((obj, i) => 
             <Task 
@@ -135,15 +129,11 @@ const Main: React.FC<MainProps> = () => {
         }
       </div>
       <AddTaskForm
-        isVisible={isVisible}
-        onClose={() => setIsVisible(false)}
         onAddTask={onAddTask}
         onInputTask={onInputTask} 
         onStatusTask={onStatusTask}
       />
       <UpdateTaskForm
-        isVisibleUpdate={isVisibleUpdate}
-        onClose={() => setIsVisibleUpdate(false)}
         onEditEnd={onEditEnd}
         onInputTask={onInputTask}
         onStatusTask={onStatusTask}
@@ -152,6 +142,6 @@ const Main: React.FC<MainProps> = () => {
       />
     </div>
   );
-};
+});
 
 export default Main;

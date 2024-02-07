@@ -3,20 +3,20 @@ import './AddTaskForm.css'
 import Input from './Input';
 import Status from './Status';
 import { ChangeEvent } from 'react';
+import store from '../../../../stores/mainStore';
+import { observer } from 'mobx-react-lite';
 
 type AddTaskFormProps = {
-  isVisible: boolean;
-  onClose: () => void; 
   onAddTask: () => void;
   onInputTask: (e: ChangeEvent<HTMLInputElement>) => void;
   onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, onAddTask, onInputTask, onStatusTask }) => {
+const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ onAddTask, onInputTask, onStatusTask }) => {
   const onClick = () => {
-    onClose();
+    store.isVisibleAddModal = false;
   }
-  return (!isVisible) ? null : (
+  return (!store.isVisibleAddModal) ? null : (
     <div className="modal" onClick={onClick}>
       <div className="modal-dialog" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
@@ -42,12 +42,12 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ isVisible = false, onClose, o
         <div className="modal-footer">
           <div>
             <button className="addTaskButton" onClick={onAddTask}>Add Task</button>
-            <button className="cancelButton" onClick={onClose}>Cancel</button>
+            <button className="cancelButton" onClick={() => store.isVisibleAddModal = false}>Cancel</button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default AddTaskForm;
