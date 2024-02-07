@@ -2,18 +2,16 @@ import * as React from 'react';
 import './Task.css';
 import EditTask from './ButtonForTask/EditTask/EditTask';
 import RemoveTask from './ButtonForTask/RemoveTask/RemoveTask';
-import { MouseEvent, ChangeEvent } from 'react';
+import store from '../../../stores/mainStore';
 
 type TaskProps = {
   textTask: string;
   time: string;
   isCompleted: boolean;
-  onRemoveTask: (e: MouseEvent<HTMLButtonElement>) => void;
-  onEditStart: (id: string) => void;
-  onChecked: (e: ChangeEvent<HTMLInputElement>, id: string) => void;
+  onChecked: (checked: boolean, id: string) => void;
 };
 
-const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask, onEditStart, onChecked }) => {
+const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onChecked }) => {
   const textTaskStyle = (): string => {
     return isCompleted ? "textTaskCompleted" : "textTaskIncompleted";
   };
@@ -23,8 +21,12 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask,
   };
 
   const isCheckbox = (): string => {
-    return isCompleted ? "checkboxNewCompleted" : "checkboxNewIncompleted"
+    return isCompleted ? "checkboxNewCompleted" : "checkboxNewIncompleted";
   }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChecked(e.target.checked, time);
+  };
 
   return (
     <div className="task">
@@ -36,7 +38,7 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask,
               type="checkbox" 
               name="checkboxTask" 
               defaultChecked={isChecked()} 
-              onChange={(event) => onChecked(event, time)}
+              onChange={onChange}
             />
             <span className={isCheckbox()}></span>
           </label>
@@ -48,14 +50,8 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onRemoveTask,
           </div>
         </div>
         <div>
-          <RemoveTask 
-            onRemoveTask={onRemoveTask} 
-            time={time}
-          />
-          <EditTask 
-            onEditStart={onEditStart} 
-            time={time}
-          />
+          <RemoveTask time={time} />
+          <EditTask time={time}/>
         </div>
       </div>
     </div>

@@ -1,16 +1,16 @@
 import * as React from 'react';
 import './EditTask.css';
 import Pencil from './Pencil';
+import store from '../../../../../stores/mainStore';
 
 type EditTaskProps = {
   time: string;
-  onEditStart: (id: string) => void;
 };
 
-const EditTask:  React.FC<EditTaskProps> = ({ time, onEditStart }) => {
+const EditTask:  React.FC<EditTaskProps> = ({ time, }) => {
   return (
     <>
-      <button className="EditTaskButton" onClick={() => onEditStart(time)}><Pencil /></button>
+      <button className="EditTaskButton" onClick={() => store.onEditStart(time)}><Pencil /></button>
     </>
   );
 };

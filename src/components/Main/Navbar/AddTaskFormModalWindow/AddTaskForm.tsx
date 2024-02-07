@@ -7,12 +7,10 @@ import store from '../../../../stores/mainStore';
 import { observer } from 'mobx-react-lite';
 
 type AddTaskFormProps = {
-  onAddTask: () => void;
-  onInputTask: (e: ChangeEvent<HTMLInputElement>) => void;
-  onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
+
 };
 
-const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ onAddTask, onInputTask, onStatusTask }) => {
+const AddTaskForm: React.FC<AddTaskFormProps> = observer(() => {
   const onClick = () => {
     store.isVisibleAddModal = false;
   }
@@ -28,12 +26,10 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ onAddTask, onInputTa
         <div className="modal-body">
           <div className="modal-content">
             <div>
-              <Input 
-                onInputTask={onInputTask} 
+              <Input  
                 textTask={""}
               />
               <Status 
-                onStatusTask={onStatusTask}
                 statusTask={"Incomplete"}
               />
             </div>
@@ -41,7 +37,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ onAddTask, onInputTa
         </div>
         <div className="modal-footer">
           <div>
-            <button className="addTaskButton" onClick={onAddTask}>Add Task</button>
+            <button className="addTaskButton" onClick={store.onAddTask}>Add Task</button>
             <button className="cancelButton" onClick={() => store.isVisibleAddModal = false}>Cancel</button>
           </div>
         </div>

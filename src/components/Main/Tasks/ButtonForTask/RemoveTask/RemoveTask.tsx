@@ -1,16 +1,15 @@
 import * as React from 'react';
 import './RemoveTask.css';
 import Trash from './Trash';
-import { MouseEvent } from 'react';
+import store from '../../../../../stores/mainStore';
 
 type RemoveTaskProps = {
-  onRemoveTask: (e: MouseEvent<HTMLButtonElement>) => void;
   time: string;
 }
 
-const RemoveTask:  React.FC<RemoveTaskProps> = ({ onRemoveTask, time }) => {
+const RemoveTask:  React.FC<RemoveTaskProps> = ({ time }) => {
   return (
-    <button className="removeTaskButton" onClick={onRemoveTask} id={time}><Trash /></button>
+    <button className="removeTaskButton" onClick={store.onRemoveTask} id={time}><Trash /></button>
   );
 };
 
