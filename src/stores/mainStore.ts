@@ -128,7 +128,6 @@ class MainStore {
     };
     this.tasks.push(obj);
     this.isVisibleAddModal = false;
-    this.isCompletedTask = false;
   };
 
   onChecked = (checked: boolean, id: string) => {
