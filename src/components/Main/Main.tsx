@@ -19,7 +19,10 @@ const Main: React.FC<MainProps> = observer(() => {
     <div className="main">
       <div className="navbar">
         <AddTaskButton />
-        <Selector className={"selector"} />
+        <Selector 
+          className={"selector"} 
+          onChange={store.onDisplayTasks}
+        />
       </div>
       <div>
         {

@@ -25,8 +25,14 @@ const UpdateTaskForm: React.FC<UpdateTaskFormProps> = observer(() => {
         <div className="modal-body">
           <div className="modal-content">
             <div>
-              <Input textTask={store.currentlyEditedTask()} />
-              <Status statusTask={store.currentlyEditedStatus()} />
+              <Input 
+                textTask={store.currentlyEditedTask()} 
+                onChange={store.onInputTask}
+              />
+              <Status 
+                statusTask={store.currentlyEditedStatus()} 
+                onChange={store.onStatusTask}
+              />
             </div>
           </div>
         </div>

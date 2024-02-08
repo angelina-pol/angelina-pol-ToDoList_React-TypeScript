@@ -7,7 +7,7 @@ type EditTaskProps = {
   time: string;
 };
 
-const EditTask:  React.FC<EditTaskProps> = ({ time, }) => {
+const EditTask:  React.FC<EditTaskProps> = ({ time }) => {
   return (
     <>
       <button className="EditTaskButton" onClick={() => store.onEditStart(time)}><Pencil /></button>

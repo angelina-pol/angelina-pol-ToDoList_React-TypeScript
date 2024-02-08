@@ -2,7 +2,6 @@ import * as React from 'react';
 import './AddTaskForm.css'
 import Input from './Input';
 import Status from './Status';
-import { ChangeEvent } from 'react';
 import store from '../../../../stores/mainStore';
 import { observer } from 'mobx-react-lite';
 
@@ -28,9 +27,11 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(() => {
             <div>
               <Input  
                 textTask={""}
+                onChange={store.onInputTask}
               />
               <Status 
                 statusTask={"Incomplete"}
+                onChange={store.onStatusTask}
               />
             </div>
           </div>

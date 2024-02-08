@@ -2,7 +2,6 @@ import * as React from 'react';
 import './Task.css';
 import EditTask from './ButtonForTask/EditTask/EditTask';
 import RemoveTask from './ButtonForTask/RemoveTask/RemoveTask';
-import store from '../../../stores/mainStore';
 
 type TaskProps = {
   textTask: string;
@@ -51,7 +50,7 @@ const Task:  React.FC<TaskProps> = ({ textTask, time, isCompleted, onChecked }) 
         </div>
         <div>
           <RemoveTask time={time} />
-          <EditTask time={time}/>
+          <EditTask time={time} />
         </div>
       </div>
     </div>

@@ -1,15 +1,16 @@
 import './Input.css';
-import store from '../../../../stores/mainStore';
+import { ChangeEvent } from 'react';
 
 type InputProps = {
   textTask: string | undefined;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input: React.FC<InputProps> = ({ textTask }) => {
+const Input: React.FC<InputProps> = ({ textTask, onChange }) => {
   return (
     <label className="titleInput">
       Title
-      <input className="inputTask" onChange={store.onInputTask} defaultValue={textTask}></input>
+      <input className="inputTask" onChange={onChange} defaultValue={textTask}></input>
     </label>
   );
 };
