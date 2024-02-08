@@ -1,17 +1,16 @@
 import './Status.css';
-import { ChangeEvent } from 'react';
+import store from '../../../../stores/mainStore';
 
 type StatusProps = {
-  onStatusTask: (e: ChangeEvent<HTMLSelectElement>) => void;
   statusTask: string | undefined;
 };
 
-const Status: React.FC<StatusProps> = ({ onStatusTask, statusTask }) => {
+const Status: React.FC<StatusProps> = ({ statusTask }) => {
   return (
     <label className="statusInput">
       Status
       <div>
-      <select className="statusChoose" onChange={onStatusTask}>
+      <select className="statusChoose" onChange={store.onStatusTask}>
         <option>{statusTask}</option>
         <option>
           {

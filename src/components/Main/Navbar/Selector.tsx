@@ -1,15 +1,14 @@
 import './Selector.css';
-import { ChangeEvent } from 'react';
+import store from '../../../stores/mainStore';
 
 type SelectorProps = {
-  onDisplayTasks: (e: ChangeEvent<HTMLSelectElement> ) => void;
   className: string;
 };
 
-const Selector: React.FC<SelectorProps> = ({ onDisplayTasks, className }) => {
+const Selector: React.FC<SelectorProps> = ({ className }) => {
   return (
     <div>
-      <select className={className} onChange={onDisplayTasks}>
+      <select className={className} onChange={store.onDisplayTasks}>
         <option>All</option>
         <option>Incomplete</option>
         <option>Complete</option>
