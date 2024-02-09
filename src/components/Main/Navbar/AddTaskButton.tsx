@@ -1,17 +1,16 @@
 import * as React from 'react';
 import './AddTaskButton.css';
 import { observer } from 'mobx-react-lite';
-import store from '../../../stores/mainStore';
 
 type AddTaskButtonProps = {
-  
+  onClick: () => void;
 };
 
-const AddTaskButton: React.FC<AddTaskButtonProps> = observer(() => {
+const AddTaskButton: React.FC<AddTaskButtonProps> = observer(({ onClick }) => {
   return (
     <>
       <div>
-        <button className="button" onClick={() => store.isVisibleAddModal = true}>Add Task</button>
+        <button className="button" onClick={onClick}>Add Task</button>
       </div>
     </>
   );

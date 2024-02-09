@@ -110,6 +110,12 @@ class MainStore {
   onEditStart = (id: string) => {
     this.isVisibleUpdateModal = true;
     this.currentlyEditedTaskId = id;
+    const obj = this.tasks.find(el => el.time === this.currentlyEditedTaskId);
+    if (!obj) {
+      throw new Error('task not found!');
+    }
+    this.task = obj.task;
+    this.isCompletedTask = obj.isCompleted;
   };
 
   onInputTask = (e: ChangeEvent<HTMLInputElement>) => {
@@ -128,6 +134,7 @@ class MainStore {
     };
     this.tasks.push(obj);
     this.isVisibleAddModal = false;
+    this.isCompletedTask = false;
   };
 
   onChecked = (checked: boolean, id: string) => {
@@ -151,11 +158,7 @@ class MainStore {
   };
 
   onStatusTask = (e: ChangeEvent<HTMLSelectElement>) => {
-    this.isCompletedTask = (
-      e.target.value === "Complete"
-        ? true
-        : false
-    );
+    this.isCompletedTask = e.target.value === "Complete";
   };
 
   onEditEnd = () => {
