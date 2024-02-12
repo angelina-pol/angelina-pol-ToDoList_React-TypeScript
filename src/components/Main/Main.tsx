@@ -9,19 +9,17 @@ import { observer } from 'mobx-react-lite';
 import store from '../../stores/mainStore';
 import ModalWindow from '../ModalWindow/ModalWindow';
 
-type MainProps = {
+type MainProps = Record<string, never>; // { [key: string]: never }
 
-};
-
-const Main: React.FC<MainProps> = observer(() => {
+const Main: React.FC<MainProps> = () => {
   return (
     <div className="main">
       <div className="navbar">
-        <AddTaskButton 
+        <AddTaskButton
           onClick={() => store.isVisibleAddModal = true}
         />
-        <Selector 
-          className={"selector"} 
+        <Selector
+          className={"selector"}
           onChange={store.onDisplayTasks}
         />
       </div>
@@ -50,7 +48,7 @@ const Main: React.FC<MainProps> = observer(() => {
         statusTask="Incomplete"
         onChangeStatus={store.onStatusTask}
         onClickAddTask={store.onAddTask}
-        onClose={() => {store.isVisibleAddModal = false}}
+        onClose={() => { store.isVisibleAddModal = false }}
       />
       <ModalWindow
         titleButton='Update Task'
@@ -60,10 +58,10 @@ const Main: React.FC<MainProps> = observer(() => {
         statusTask={store.currentlyEditedStatus()}
         onChangeStatus={store.onStatusTask}
         onClickAddTask={store.onEditEnd}
-        onClose={() => {store.isVisibleUpdateModal = false}}
+        onClose={() => { store.isVisibleUpdateModal = false }}
       />
     </div>
   );
-});
+};
 
-export default Main;
+export default observer(Main);
