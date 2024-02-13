@@ -8,8 +8,6 @@ type StateTask = {
 }
 
 type PrivateField = 
-  | "_isVisibleAddModal"
-  | "_isVisibleUpdateModal"
   | "_task"
   | "_tasks"
   | "tasks"
@@ -18,8 +16,6 @@ type PrivateField =
   | "_displayTasks";
 
 class MainStore {
-  private _isVisibleAddModal = false;
-  private _isVisibleUpdateModal = false;
   private _task = '';
   private _tasks: StateTask[] = [];
   private _currentlyEditedTaskId = '';
@@ -30,10 +26,6 @@ class MainStore {
     makeObservable<MainStore, PrivateField>(this, {
       tasks: computed,
       _tasks: observable,
-      isVisibleAddModal: computed,
-      _isVisibleAddModal: observable,
-      isVisibleUpdateModal: computed,
-      _isVisibleUpdateModal: observable,
       task: computed,
       _task: observable,
       currentlyEditedTaskId: computed,
@@ -52,22 +44,6 @@ class MainStore {
 
   private set tasks(value: StateTask[]) {
     this._tasks = value;
-  };
-
-  get isVisibleAddModal() {
-    return this._isVisibleAddModal;
-  };
-
-  set isVisibleAddModal(value: boolean) {
-    this._isVisibleAddModal = value;
-  };
-
-  get isVisibleUpdateModal() {
-    return this._isVisibleUpdateModal;
-  };
-
-  set isVisibleUpdateModal(value: boolean) {
-    this._isVisibleUpdateModal = value;
   };
 
   get task() {
@@ -108,7 +84,6 @@ class MainStore {
   }
 
   onEditStart = (id: string) => {
-    this.isVisibleUpdateModal = true;
     this.currentlyEditedTaskId = id;
     const obj = this.tasks.find(el => el.time === this.currentlyEditedTaskId);
     if (!obj) {
@@ -133,7 +108,6 @@ class MainStore {
       isCompleted: this.isCompletedTask,
     };
     this.tasks.push(obj);
-    this.isVisibleAddModal = false;
     this.isCompletedTask = false;
   };
 
@@ -165,7 +139,6 @@ class MainStore {
     const editedTask = this.tasks.filter(obj => obj.time === this.currentlyEditedTaskId)[0];
     const indexForChange = this.tasks.indexOf(editedTask);
     this.tasks.splice(indexForChange, 1, { task: this.task, time: this.currentlyEditedTaskId, isCompleted: this.isCompletedTask });
-    this.isVisibleUpdateModal = false;
   };
 
   currentlyEditedTask = () => {
