@@ -47,12 +47,13 @@ const Main: React.FC<MainProps> = () => {
             ? <TaskNoFound />
             : store.filteredTasks.map((obj) => (
               <Task
+                key={obj.time}
                 textTask={obj.task}
                 id={obj.time}
                 isCompleted={obj.isCompleted}
                 onChecked={store.onChecked}
                 removeOnClick={store.onRemoveTask}
-                editOnClick={() => onEditStartClick}
+                editOnClick={onEditStartClick}
                 onEditStart={onEditStartClick}
               />
             ))
@@ -66,7 +67,7 @@ const Main: React.FC<MainProps> = () => {
         statusTask="Incomplete"
         onChangeStatus={store.onStatusTask}
         onClickAddTask={onAddTaskClink}
-        onClose={() => setIsVisibleAddModal(true)}
+        onClose={() => setIsVisibleAddModal(false)}
       />
       <ModalWindow
         titleButton='Update Task'
