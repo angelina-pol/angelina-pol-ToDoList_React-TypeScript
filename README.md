@@ -1,9 +1,19 @@
 <h2>About project:</h2>
 <p>this is todo list for manage your personal tasks</p>
 <h2>Technology stack:</h2>
-<li>
-  <ul>Language: JavaScript, TypeScript</ul>
-  <ul>Framework: React</ul>
-  <ul>Library: Mobx</ul>
-</li>
+<ul>
+  <li>Language: JavaScript, TypeScript</ul>
+  <li>Framework: React</ul>
+  <li>Library: Mobx</ul>
+</ul>
 <h2>Screenshots:</h2>
+<div>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_1.png"/>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_2.png"/>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_3.png"/>
+</div>
+<div>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_4.png"/>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_5.png"/>
+  <img src="https://github.com/angelina-pol/angelina-pol-ToDoList_React-TypeScript/blob/main/picture/Screen_6.png"/>
+</div>
